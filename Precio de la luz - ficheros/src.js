@@ -8,28 +8,23 @@ async function saveDataInLocalStorage() {
             'https://api.allorigins.win/get?url=https://api.preciodelaluz.org/v1/prices/all?zone=PCB'
         );
         const data = await response.json();
-        //console.log(data);
         const { contents } = data;
-        //console.log(contents);
-        //console.log(typeof contents);
-
         const hours = JSON.parse(contents);
-        //console.log(hours);
-        //console.log(typeof hours);
         localStorage.setItem('hours', JSON.stringify(hours));
-        //
     } catch (error) {
         console.error(error);
     }
 }
+// Para que el fetch no se haga antes de los 5min de la consulta anterior
 setInterval(saveDataInLocalStorage, 300000);
 
+// Función para formatear numeros de días y meses
 const formatNum = (num) => {
     return num < 10 ? '0' + num : num;
 };
 
-/* Leo datos en el localStorage y convierto a objeto */
-function getDataFromLocalStorage() {
+function workingDataFromLocalStorage() {
+    // Seleccion de algunos elementos html para trabajarlos
     const pCurrentPrice = document.querySelector('p#currentPrice');
     const pMinPrice = document.querySelector('p#economicPrice');
     const pMaxPrice = document.querySelector('p#expensivePrice');
@@ -37,34 +32,27 @@ function getDataFromLocalStorage() {
     const expensiveHour = document.querySelector('p#expensiveHour');
     let now = new Date();
     let currentHour = now.getHours();
-    console.log(typeof currentHour);
 
+    /* Leo datos en el localStorage y convierto a objeto */
     let hours = JSON.parse(localStorage.getItem('hours'));
-    //console.log(hours);
 
+    // Guardar precios en un array
     let arrayPrices = [];
-
     for (let hour in hours) {
         const hoursAddPrices = hours[hour];
-        console.log(hoursAddPrices);
-        //return hoursAddPrices;
-        //console.log(typeof hour);
-        //console.log(typeof hoursAddPrices);
         const precio = hoursAddPrices.price;
-        //console.log(precio);
         arrayPrices.push(precio);
-
-        /* const hora = hoursAddPrices.hour;
-        console.log(hora); */
     }
     console.log(arrayPrices);
 
+    // Hora actual
     for (let i = 0; i < 24; i++) {
         if (currentHour === i) {
             pCurrentPrice.textContent = `${arrayPrices[i]}€ \n Mwh`;
         }
     }
 
+    // Nuevo array para guardar los precios ordenados
     let arrayPricesSorted = [];
     for (let i = 0; i < 24; i++) {
         arrayPricesSorted.push(arrayPrices[i]);
@@ -72,24 +60,18 @@ function getDataFromLocalStorage() {
     console.log(arrayPricesSorted);
 
     for (let j = 0; j < arrayPricesSorted.length - 1; j++) {
-        // Bucle secundario que se encarga de ordenar mover el nº más
-        // grande a la derecha.
         for (let i = 0; i < arrayPricesSorted.length; i++) {
-            // Comprobamos si el nº actual es mayor que el nº siguiente.
             if (arrayPricesSorted[i] > arrayPricesSorted[i + 1]) {
-                // Almacenamos el nº actual en una variable temporal.
                 const tmp = arrayPricesSorted[i];
-
-                // Almacenamos en la posición actual el nº menos.
                 arrayPricesSorted[i] = arrayPricesSorted[i + 1];
-
-                // Almacenamos en la posición siguiente el valor temporal.
                 arrayPricesSorted[i + 1] = tmp;
             }
         }
     }
     console.log(arrayPricesSorted);
 
+    /* Del nuevo array de precios ordenados, la primera posición 
+       será el menor precio y la última posición el mayor precio */
     let minPrice = arrayPricesSorted[0];
     let maxPrice = arrayPricesSorted[23];
     console.log(minPrice);
@@ -98,6 +80,7 @@ function getDataFromLocalStorage() {
     pMinPrice.textContent = `${minPrice}€ \n Mwh`;
     pMaxPrice.textContent = `${maxPrice}€ \n Mwh`;
 
+    // Asignación de franja horaria para precios min y max de la luz
     for (let i = 0; i < 24; i++) {
         if (minPrice === arrayPrices[i]) {
             let positionMinPrice = arrayPrices.indexOf(arrayPrices[i]);
@@ -115,11 +98,12 @@ function getDataFromLocalStorage() {
         }
     }
 
-    //Array ordenado de consumos en Mwh de artículos eléctricos
+    // Array ordenado de consumos en Mwh de cada artículo eléctrico
     const electricityConsumption = [
         0.0009, 0.00025, 0.0028, 0.0002, 0.0022, 0.0004, 0.0015,
     ];
 
+    // Array de precios del consumo durante una hora por cada artículo eléctrico
     let itemsPricesForHour = [];
     for (let i = 0; i < 24; i++) {
         if (currentHour === i) {
@@ -132,18 +116,20 @@ function getDataFromLocalStorage() {
     }
     console.log(itemsPricesForHour);
 
+    // Agregando el precio de consumo de una hora a cada artículo eléctrico
     const electricalItem = document.querySelectorAll('section>ul>li>p');
     electricalItem.forEach((item, index) => {
         const priceForHour = itemsPricesForHour[index];
         console.log(item, priceForHour);
-        item.textContent = `${priceForHour}€  \n  costo por hora`;
+        item.textContent = `Costo por hora \n ${priceForHour}€`;
     });
 }
-getDataFromLocalStorage();
+workingDataFromLocalStorage();
 
 function currentDate() {
+    // Variables y selección de elementos
     const pDates = document.querySelectorAll('p.currentDate');
-    const pHours = document.querySelector('p#currentHour');
+    const pCurrentHours = document.querySelector('p#currentHour');
 
     const now = new Date();
     const currentHour = now.getHours();
@@ -167,11 +153,12 @@ function currentDate() {
         'Diciembre',
     ];
 
+    // Añadimos la fecha actual al HTML
     for (let date of pDates) {
         date.textContent = `${currentDay} de ${months[currenMonth]} de ${currenYear}`;
     }
 
-    pHours.textContent = `${formatNum(currentHour)}:${formatNum(
+    pCurrentHours.textContent = `${formatNum(currentHour)}:${formatNum(
         currentMinuts
     )}:${formatNum(currentSeconds)}`;
 }

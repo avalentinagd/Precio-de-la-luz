@@ -9,7 +9,7 @@
 /******************
  Versión móvil 
  Samsung Galaxy S8+  
- ******************/
+ *****************/
 
 body {
     display: flex;
@@ -92,7 +92,7 @@ main > section:first-child > ul > li:nth-child(3) {
     border-radius: 10%;
     padding: 1px 0;
     margin: 20px 0;
-    color: rgb(216, 215, 215);
+    color: rgb(255, 255, 255);
 }
 
 main > section:first-child > ul > li:first-child{
@@ -159,10 +159,10 @@ footer  {
     text-align: center;
 }
 
-/******************
+/***************
  Versión tablet 
  iPad Mini 
- ******************/
+ **************/
  @media (min-width: 700px){
     
     body {
@@ -202,9 +202,9 @@ footer  {
     }  
  }
 
- /******************
- Versión ordenador
- ******************/
+ /*****************
+  Versión ordenador
+ *****************/
 
  @media (min-width: 1014px){
     
