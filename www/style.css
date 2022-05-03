@@ -1,0 +1,230 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,500;1,700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/******************
+ Versión móvil 
+ Samsung Galaxy S8+  
+ ******************/
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url('./imagenes/fondos/azul2.jpg');
+    background-size: cover;
+    font-family:  'Ubuntu', sans-serif;
+    max-width: 360px;
+}
+
+
+/****** HEADER ******/
+
+body > header {
+    width: 360px;
+    margin: 40px 0;
+}
+
+body > header > h1 {
+    font-weight: lighter;
+    color: rgb(0, 133, 115);
+    font-size: 40px;
+    text-align: center;
+    width: 360px;
+}
+
+body > header > h1 > strong {
+    font-weight: bold;
+    font-size: 50px;
+}
+
+
+/********** MAIN ************/
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+main > section > h2{
+    color: rgb(92, 92, 92);
+    text-align: center;
+}
+
+ul li {
+    list-style: none;
+}
+
+
+/******SECCION PRECIOS GLOBALES ******/
+
+main > section:first-child > h2 {
+    margin-top: 34px;
+    margin-bottom: 40px;
+}
+
+
+main > section:first-child > ul > li {
+    width: 275px;
+
+}
+
+main > section:first-child > ul > li > section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 40px 0px;
+}
+
+main > section > ul> li > section > img{
+    width: 60px;
+    margin-bottom: 10px;
+}
+
+main > section:first-child > ul > li:first-child,
+main > section:first-child > ul > li:nth-child(2),
+main > section:first-child > ul > li:nth-child(3) {
+    border-radius: 10%;
+    padding: 1px 0;
+    margin: 20px 0;
+    color: rgb(216, 215, 215);
+}
+
+main > section:first-child > ul > li:first-child{
+    background-color: rgb(2, 180, 156);
+}
+
+main > section:first-child > ul > li:nth-child(2){
+    background-color: rgb(2, 180, 76);
+}
+
+main > section:first-child > ul > li:nth-child(3){
+    background-color: rgb(180, 2, 2);
+}
+
+main > section:first-child > ul > li > section > p:last-of-type{
+    font-size: 60px;
+    text-align: center;
+}
+
+
+/******* SECCIÓN PRECIOS POR ARTÍCULO *******/
+
+main > section:nth-child(2) > h2 {
+    margin-top: 60px;
+    margin-bottom: 30px;
+}
+
+main > section:nth-child(2) > ul > li > div > img {
+    width: 110px;
+    margin: 10px 10px;
+}
+
+main > section:nth-child(2) > ul > li > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+main > section:nth-child(2) > ul > li {
+    width: 275px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    margin: 40px 0;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    color: rgb(0, 133, 115);
+}
+
+main > section:nth-child(2) > ul > li > p {
+    font-size: x-large;
+    text-align: center;
+}
+
+
+/***** FOOTER *****/
+
+footer  {
+    width: 275px;
+    margin: 40px 40px;
+    background-color: rgb(0, 133, 115);
+    color: rgb(216, 215, 215);
+    padding: 20px;
+    text-align: center;
+}
+
+/******************
+ Versión tablet 
+ iPad Mini 
+ ******************/
+ @media (min-width: 700px){
+    
+    body {
+        display: block;
+        min-width: 768px;
+    }
+    
+    body > header {
+        min-width: 768px;
+    }
+    
+    body > header > h1 {
+        font-size: 60px;
+        min-width: 768px;
+        
+    }
+    
+    body > header > h1 > strong {
+        font-size: 70px;
+    }
+    
+    main {
+        min-width: 768px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    main > section:first-child {
+        align-self: flex-start;
+        margin-top: 26px;
+    }
+
+    footer {
+        display: block;
+        min-width: 690px;
+    }  
+ }
+
+ /******************
+ Versión ordenador
+ ******************/
+
+ @media (min-width: 1014px){
+    
+    body {
+        display: block;
+        min-width: 1014px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin-left: 120px;
+    }
+
+    html,
+    body > header,
+    body > header > h1,
+    main,
+    footer {
+        min-width: 1014px;
+    }
+
+    footer > p {
+        font-size: xx-large;
+    }
+ }

@@ -1,0 +1,24 @@
+{
+  "name": "Precio-de-la-luz",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/avalentinagd/Precio-de-la-luz.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/avalentinagd/Precio-de-la-luz/issues"
+  },
+  "homepage": "https://github.com/avalentinagd/Precio-de-la-luz#readme",
+  "devDependencies": {
+    "eslint": "^8.14.0",
+    "prettier": "^2.6.2"
+  }
+}
